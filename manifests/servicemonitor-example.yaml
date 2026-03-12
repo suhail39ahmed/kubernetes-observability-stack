@@ -1,0 +1,19 @@
+# Example ServiceMonitor for app metrics (Prometheus Operator)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: example-app
+  namespace: default
+  labels:
+    release: observability
+spec:
+  selector:
+    matchLabels:
+      app: example-app
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - default
